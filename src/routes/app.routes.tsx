@@ -13,7 +13,8 @@ export type AppNavigatorRoutesProps =
   NativeStackNavigationProp<AppRoutesTypeProps>;
 
 export function AppRoutes() {
-  const { Navigator, Screen } = createNativeStackNavigator<AppRoutesTypeProps>();
+  const { Navigator, Screen } =
+    createNativeStackNavigator<AppRoutesTypeProps>();
 
   return (
     <Navigator
@@ -22,7 +23,11 @@ export function AppRoutes() {
         animation: "slide_from_right",
       }}
     >
-      <Screen name="home" component={Home} />
+      <Screen
+        name="home"
+        component={Home}
+        options={{ gestureEnabled: false }}
+      />
     </Navigator>
   );
 }
