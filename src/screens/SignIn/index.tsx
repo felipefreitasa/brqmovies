@@ -8,6 +8,8 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 
+import { useAuth } from "@hooks/useAuth";
+
 import BrqLogoPng from "@assets/brq-logo.png";
 
 import { Input } from "@components/Input";
@@ -36,14 +38,16 @@ const signInSchema = yup.object({
 });
 
 export function SignIn() {
+  const { setIsLogged } = useAuth()
+
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarVisible, setSnackbarVisible] = useState(false);
 
   const {
     control,
+    getValues,
     resetField,
     handleSubmit,
-    getValues,
     formState: { errors, isValid },
   } = useForm<FormDataProps>({
     resolver: yupResolver(signInSchema),
@@ -53,7 +57,7 @@ export function SignIn() {
 
   function handleSignIn({ user, password }: FormDataProps) {
     if (user === "user" && password === "123") {
-      console.log("Login successful");
+      setIsLogged(true)
     } else {
       setSnackbarVisible(true);
       setSnackbarMessage("Usuário inválido!");

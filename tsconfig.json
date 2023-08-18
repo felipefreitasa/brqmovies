@@ -4,8 +4,10 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
+      "@hooks/*": ["./src/hooks/*"],
       "@assets/*": ["./src/assets/*"],
       "@screens/*": ["./src/screens/*"],
+      "@context/*": ["./src/context/*"],
       "@components/*": ["./src/components/*"],
     }
   }

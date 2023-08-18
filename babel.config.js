@@ -8,8 +8,10 @@ module.exports = function(api) {
         {
           root: [ './src'],
           alias: {
+            '@hooks': './src/hooks',
             '@assets': './src/assets',
             '@screens': './src/screens',
+            '@context': './src/context',
             '@components': './src/components',
           }
         }
