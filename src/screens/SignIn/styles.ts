@@ -1,4 +1,5 @@
-import styled, { css } from 'styled-components/native'
+import styled, { css } from "styled-components/native";
+import { Snackbar as SnackbarMaterial } from "@react-native-material/core";
 
 export const Container = styled.View`
   flex: 1;
@@ -32,4 +33,10 @@ export const ForgotPasswordButtonLabel = styled.Text`
     color: ${theme.COLORS.WHITE};
     font-family: ${theme.FONTS.BOLD};
   `}
+`;
+
+export const Snackbar = styled(SnackbarMaterial)`
+  bottom: 20px;
+  position: absolute;
+  background-color: ${({ theme }) => theme.COLORS.ERROR_10};
 `;

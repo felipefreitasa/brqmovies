@@ -9,7 +9,10 @@ export default {
 
     DISABLED: '#A9A9A9',
 
-    WHITE: '#FFFFFF'
+    WHITE: '#FFFFFF',
+
+    ERROR: '#E32A2A',
+    ERROR_10: '#681F21'
   },
 
   FONTS: {
