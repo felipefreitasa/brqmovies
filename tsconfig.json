@@ -4,6 +4,7 @@
     "strict": true,
     "baseUrl": "./",
     "paths": {
+      "@assets/*": ["./src/assets/*"],
       "@screens/*": ["./src/screens/*"],
       "@components/*": ["./src/components/*"],
     }
