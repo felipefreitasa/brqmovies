@@ -6,10 +6,17 @@ export default {
     PRIMARY: '#DF8F33',
 
     GRAY: '#929395',
+
+    DISABLED: '#A9A9A9',
+
+    WHITE: '#FFFFFF',
+
+    ERROR: '#E32A2A',
+    ERROR_10: '#681F21'
   },
 
   FONTS: {
-    REGULAR: 'Inter_400Regular',
-    BOLD: 'Inter_700Bold'
+    BOLD: 'Roboto_700Bold',
+    REGULAR: 'Roboto_400Regular', 
   }
 }
