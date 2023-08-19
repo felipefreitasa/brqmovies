@@ -4,6 +4,7 @@ export default {
     BACKGROUND_SECONDARY: '#2E2F33',
 
     PRIMARY: '#DF8F33',
+    PRIMARY_10: '#DF8F331A',
 
     GRAY: '#929395',
 
