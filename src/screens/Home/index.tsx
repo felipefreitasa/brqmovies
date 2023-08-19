@@ -3,10 +3,14 @@ import { BackHandler, FlatList } from "react-native";
 
 import { api } from "@services/api";
 
+import { useMovies } from "@hooks/useMovies";
+
+import { MovieProps } from "@context/MoviesContext";
+
 import { AppBar } from "@components/AppBar";
 import { Loading } from "@components/Loading";
+import { MovieCard } from "@components/MovieCard";
 import { ErrorCard } from "@components/ErrorCard";
-import { MovieCard, MovieProps } from "@components/MovieCard";
 
 import { Container } from "./styles";
 
@@ -14,6 +18,8 @@ export function Home() {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [popularMovies, setPopularMovies] = useState<MovieProps[]>([]);
+
+  const { setSelectedMovie } = useMovies();
 
   async function fetchPopularMovies() {
     try {
@@ -24,7 +30,7 @@ export function Home() {
 
     } catch (error) {
       setHasError(true);
-
+      
     } finally {
       setIsLoading(false);
     }
@@ -55,10 +61,13 @@ export function Home() {
               <FlatList
                 numColumns={2}
                 data={popularMovies}
-                keyExtractor={(item) => item.id.toString()}
                 style={{ width: "100%", paddingHorizontal: 8 }}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                  <MovieCard id={item.id} poster_path={item.poster_path} />
+                  <MovieCard
+                    item={item}
+                    onPress={() => setSelectedMovie(item)}
+                  />
                 )}
               />
             )}
@@ -70,8 +79,8 @@ export function Home() {
             subtitle="Estamos resolvendo o problema. Por favor, tente novamente."
             buttonTitle="Tentar novamente"
             onTryAgain={() => {
-              setHasError(false)
-              fetchPopularMovies()
+              setHasError(false);
+              fetchPopularMovies();
             }}
           />
         )}
