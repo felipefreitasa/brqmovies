@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { BackHandler, FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { api } from "@services/api";
 
 import { useMovies } from "@hooks/useMovies";
 
 import { MovieProps } from "@context/MoviesContext";
+
+import { AppNavigatorRoutesProps } from "@routes/app.routes";
 
 import { AppBar } from "@components/AppBar";
 import { Loading } from "@components/Loading";
@@ -20,6 +23,8 @@ export function Home() {
   const [popularMovies, setPopularMovies] = useState<MovieProps[]>([]);
 
   const { setSelectedMovie } = useMovies();
+
+  const { navigate } = useNavigation<AppNavigatorRoutesProps>()
 
   async function fetchPopularMovies() {
     try {
@@ -66,7 +71,10 @@ export function Home() {
                 renderItem={({ item }) => (
                   <MovieCard
                     item={item}
-                    onPress={() => setSelectedMovie(item)}
+                    onPress={() => {
+                      setSelectedMovie(item)
+                      navigate("movieDetails")
+                    }}
                   />
                 )}
               />

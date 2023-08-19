@@ -2,13 +2,13 @@ import { ReactNode, createContext, useState } from "react";
 
 export type MovieProps = {
   id: number;
+  title: string;
+  adult:  boolean;
   overview: string;
   popularity: number;
   vote_count: number;
   poster_path: string;
   release_date: string;
-  vote_average:  number;
-  original_title: string;
 };
 
 export type MoviesContextDataProps = {

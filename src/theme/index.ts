@@ -17,7 +17,7 @@ export default {
   },
 
   FONTS: {
-    BOLD: 'Roboto_700Bold',
-    REGULAR: 'Roboto_400Regular', 
+    BOLD: 'Nunito_700Bold',
+    REGULAR: 'Nunito_400Regular', 
   }
 }

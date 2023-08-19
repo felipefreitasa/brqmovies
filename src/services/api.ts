@@ -6,5 +6,6 @@ export const api = axios.create({
   baseURL: MOVIE_DB_API,
   params: {
     api_key: MOVIE_DB_API_KEY,
+    language: 'pt-BR'
   },
 });
