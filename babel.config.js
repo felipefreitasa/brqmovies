@@ -12,8 +12,16 @@ module.exports = function(api) {
             '@assets': './src/assets',
             '@screens': './src/screens',
             '@context': './src/context',
+            '@services': './src/services',
             '@components': './src/components',
           }
+        }
+      ],
+      [
+        'module:react-native-dotenv',
+        {
+          'moduleName': '@env',
+          'allowUndefined': false
         }
       ]
     ]
