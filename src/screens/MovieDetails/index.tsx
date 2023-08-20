@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ScrollView } from "react-native";
 
 import { MOVIE_DB_API_IMAGE } from "@env";
@@ -5,6 +6,9 @@ import { MOVIE_DB_API_IMAGE } from "@env";
 import { useMovies } from "@hooks/useMovies";
 
 import { formatDateToBrazilianFormat } from "@utils/formatDateToBrazilianFormat";
+
+import { saveFavoriteMovie } from "@storage/favoriteMovies/saveFavoriteMovie";
+import { removeFavoriteMovie } from "@storage/favoriteMovies/removeFavoriteMovie";
 
 import { MovieDetailsCard } from "@components/MovieDetailsCard";
 import { MoviesDetailsAppBar } from "@components/MovieDetailsAppBar";
@@ -21,11 +25,29 @@ import {
 
 export function MovieDetails() {
   
-  const { selectedMovie } = useMovies();
+  const { selectedMovie, favoriteMovies } = useMovies();
+
+  const isFavoriteMovie = favoriteMovies.some((movie) => movie.id === selectedMovie.id)
+
+  const [isFavorite, setIsFavorite] = useState(isFavoriteMovie) 
+
+  async function handleFavoriteMovie(){
+    if (isFavorite){
+      setIsFavorite(false)
+      await removeFavoriteMovie(selectedMovie)
+    } else {
+      setIsFavorite(true)
+      await saveFavoriteMovie(selectedMovie)
+    }
+  }
 
   return (
     <>
-      <MoviesDetailsAppBar title={selectedMovie.title}/>
+      <MoviesDetailsAppBar 
+        title={selectedMovie.title}
+        isFavoriteMovie={isFavorite}
+        addMovieToFavoriteList={handleFavoriteMovie}
+      />
 
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
         <Container>
