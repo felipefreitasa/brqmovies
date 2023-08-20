@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTheme } from "styled-components/native";
 import { useNavigation } from "@react-navigation/native";
 import Animated, {
+  FadeIn,
   interpolate,
   useSharedValue,
   useAnimatedStyle,
@@ -34,6 +35,7 @@ import {
 } from "./styles";
 
 const AnimatedHeader = Animated.createAnimatedComponent(Header);
+const AnimatedContent = Animated.createAnimatedComponent(Content);
 const AnimatedHeaderTitle = Animated.createAnimatedComponent(HeaderTitle);
 
 export function MovieDetails() {
@@ -89,7 +91,7 @@ export function MovieDetails() {
 
   return (
     <>
-      <AnimatedHeader style={animatedHeaderStyles}>
+      <AnimatedHeader style={animatedHeaderStyles} entering={FadeIn.duration(600)}>
         <IconButton onPress={goBack} icon="chevron-left" />
 
         <AnimatedHeaderTitle
@@ -118,7 +120,7 @@ export function MovieDetails() {
             }}
           />
 
-          <Content>
+          <AnimatedContent entering={FadeIn.duration(600).delay(300)}>
             <OriginalTitle>{selectedMovie.title}</OriginalTitle>
 
             <SynopsisLabel>SINOPSE</SynopsisLabel>
@@ -152,7 +154,7 @@ export function MovieDetails() {
                 description={selectedMovie.adult ? "Sim" : "Não"}
               />
             </CardsContainer>
-          </Content>
+          </AnimatedContent>
         </Container>
       </Animated.ScrollView>
     </>
