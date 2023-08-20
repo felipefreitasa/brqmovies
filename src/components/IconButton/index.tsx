@@ -1,23 +1,27 @@
-import { useTheme } from "styled-components/native";
-import { TouchableOpacityProps } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { TouchableOpacityProps } from "react-native";
+
+import { theme } from "@theme/index";
 
 import { Container } from "./styles";
 
 type Props = TouchableOpacityProps & {
+  iconColor?: string;
+  isActive?: boolean;
   icon: keyof typeof MaterialIcons.glyphMap;
 }
 
-export function IconButton({ icon, ...rest }: Props) {
+const { COLORS } = theme
 
-  const { COLORS } = useTheme()
+export function IconButton({ icon, iconColor = COLORS.PRIMARY, isActive, ...rest }: Props) {
 
   return (
-    <Container {...rest}>
+    <Container testID="icon-button-container" isActive={isActive} {...rest}>
       <MaterialIcons
         size={24}
         name={icon}
-        color={COLORS.PRIMARY}
+        color={iconColor}
+        testID="icon-button-icon"
       />
     </Container>
   );

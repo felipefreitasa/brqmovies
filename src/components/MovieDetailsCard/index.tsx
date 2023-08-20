@@ -3,13 +3,13 @@ import { useTheme } from "styled-components/native";
 
 import { Container, Description, Header, IconContainer, Label } from "./styles";
 
-type Props = {
+export type MovieDetailsCardProps = {
   label: string;
   description: string | number;
   icon: keyof typeof MaterialIcons.glyphMap;
 };
 
-export function MovieDetailsCard({ icon, label, description }: Props) {
+export function MovieDetailsCard({ icon, label, description }: MovieDetailsCardProps) {
   const { COLORS } = useTheme();
 
   return (
