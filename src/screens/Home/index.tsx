@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { BackHandler, FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 import { useMovies } from "@hooks/useMovies";
 
@@ -16,12 +16,12 @@ export function Home() {
   const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
   const {
-    hasError,
-    isLoading,
-    setHasError,
     popularMovies,
     setSelectedMovie,
     fetchPopularMovies,
+    isPopularMoviesLoading,
+    hasErrorAtPopularMovies,
+    setHasErrorAtPopularMovies,
   } = useMovies();
 
   useEffect(() => {
@@ -36,11 +36,11 @@ export function Home() {
     return () => backHandler.remove();
   }, []);
 
-  if (isLoading) {
+  if (isPopularMoviesLoading) {
     return <Loading />;
   }
 
-  if (hasError) {
+  if (hasErrorAtPopularMovies) {
     return (
       <ErrorCard
         icon="error"
@@ -48,7 +48,7 @@ export function Home() {
         subtitle="Estamos resolvendo o problema. Por favor, tente novamente."
         buttonTitle="Tentar novamente"
         onTryAgain={() => {
-          setHasError(false);
+          setHasErrorAtPopularMovies(false);
           fetchPopularMovies();
         }}
       />
