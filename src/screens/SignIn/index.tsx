@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import { useEffect, useState } from "react";
+import Animated, { FadeIn } from "react-native-reanimated";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -24,6 +25,12 @@ import {
   ForgotPasswordButtonLabel,
 } from "./styles";
 
+const AnimatedLogoImage = Animated.createAnimatedComponent(LogoImage);
+const AnimatedFormInputsContainer =
+  Animated.createAnimatedComponent(FormInputsContainer);
+const AnimatedFormButtonsContainer =
+  Animated.createAnimatedComponent(FormButtonsContainer);
+
 type FormDataProps = {
   user: string;
   password: string;
@@ -38,7 +45,7 @@ const signInSchema = yup.object({
 });
 
 export function SignIn() {
-  const { setIsLogged } = useAuth()
+  const { setIsLogged } = useAuth();
 
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarVisible, setSnackbarVisible] = useState(false);
@@ -53,11 +60,11 @@ export function SignIn() {
     resolver: yupResolver(signInSchema),
   });
 
-  const isButtonDisabled =  (!getValues("user") || !getValues("password"));
+  const isButtonDisabled = !getValues("user") || !getValues("password");
 
   function handleSignIn({ user, password }: FormDataProps) {
     if (user === "user" && password === "123") {
-      setIsLogged(true)
+      setIsLogged(true);
     } else {
       setSnackbarVisible(true);
       setSnackbarMessage("Usuário inválido!");
@@ -76,9 +83,15 @@ export function SignIn() {
     <KeyboardAvoidingView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Container>
-          <LogoImage alt="BRQ Movies" source={BrqLogoPng} />
+          <AnimatedLogoImage
+            alt="BRQ Movies"
+            source={BrqLogoPng}
+            entering={FadeIn.duration(600)}
+          />
 
-          <FormInputsContainer>
+          <AnimatedFormInputsContainer
+            entering={FadeIn.duration(600).delay(300)}
+          >
             <Controller
               control={control}
               name="user"
@@ -114,9 +127,11 @@ export function SignIn() {
                 />
               )}
             />
-          </FormInputsContainer>
+          </AnimatedFormInputsContainer>
 
-          <FormButtonsContainer>
+          <AnimatedFormButtonsContainer
+            entering={FadeIn.duration(600).delay(600)}
+          >
             <Button
               title="Entrar"
               disabled={isButtonDisabled}
@@ -128,7 +143,7 @@ export function SignIn() {
                 Esqueci a Senha
               </ForgotPasswordButtonLabel>
             </TouchableOpacity>
-          </FormButtonsContainer>
+          </AnimatedFormButtonsContainer>
 
           {snackbarVisible && (
             <Snackbar

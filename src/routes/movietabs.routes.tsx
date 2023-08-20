@@ -8,6 +8,7 @@ import { useAuth } from "@hooks/useAuth";
 import { theme } from "@theme/index";
 
 import { AppBar } from "@components/AppBar";
+import { View } from "react-native";
 
 export function MoviesTabs() {
   const { Screen, Navigator } = createMaterialTopTabNavigator();
@@ -33,19 +34,21 @@ export function MoviesTabs() {
         onClickMoreButton={handleLogoutDropdownVisibility}
       />
 
-      <Navigator
-        screenOptions={{
-          tabBarInactiveTintColor: theme.COLORS.GRAY,
-          tabBarActiveTintColor: theme.COLORS.PRIMARY,
-          tabBarStyle: { backgroundColor: theme.COLORS.BACKGROUND },
-          tabBarLabelStyle: { fontSize: 12, fontFamily: theme.FONTS.BOLD },
-          tabBarIndicatorStyle: { backgroundColor: theme.COLORS.PRIMARY },
-        }}
-      >
-        <Screen name="Todos os filmes" component={Home} />
+      <View style={{ zIndex: 0, flex: 1 }}>
+        <Navigator
+          screenOptions={{
+            tabBarInactiveTintColor: theme.COLORS.GRAY,
+            tabBarActiveTintColor: theme.COLORS.PRIMARY,
+            tabBarStyle: { backgroundColor: theme.COLORS.BACKGROUND },
+            tabBarLabelStyle: { fontSize: 12, fontFamily: theme.FONTS.BOLD },
+            tabBarIndicatorStyle: { backgroundColor: theme.COLORS.PRIMARY },
+          }}
+        >
+          <Screen name="Todos os filmes" component={Home} />
 
-        <Screen name="Filmes Favoritos" component={FavoriteMovies} />
-      </Navigator>
+          <Screen name="Filmes Favoritos" component={FavoriteMovies} />
+        </Navigator>
+      </View>
     </>
   );
 }

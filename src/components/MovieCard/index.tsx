@@ -1,4 +1,5 @@
 import { TouchableOpacityProps } from "react-native";
+import Animated, { FadeIn } from "react-native-reanimated";
 
 import { MOVIE_DB_API_IMAGE } from "@env";
 
@@ -13,7 +14,9 @@ export type Props = TouchableOpacityProps & {
 export function MovieCard({ item, ...rest }: Props) {
   return (
     <Container testID="movie-card-poster" activeOpacity={0.8} {...rest}>
-      <Poster source={{ uri: `${MOVIE_DB_API_IMAGE}${item.poster_path}` }} />
+      <Animated.View entering={FadeIn.duration(600)}>
+        <Poster source={{ uri: `${MOVIE_DB_API_IMAGE}${item.poster_path}` }} />
+      </Animated.View>
     </Container>
   );
 }
