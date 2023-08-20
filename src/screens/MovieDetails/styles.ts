@@ -1,3 +1,4 @@
+import { Platform } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
@@ -5,6 +6,27 @@ export const Container = styled.View`
   width: 100%;
   align-items: center;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
+`;
+
+export const Header = styled.View`
+  z-index: 1;
+  padding: 20px;
+  position: absolute;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: ${Platform.OS === "ios" ? 70 : 20}px;
+`;
+
+export const HeaderTitle = styled.Text`
+  flex: 1;
+  margin: 0 8px;
+  font-size: 22px;
+
+  ${({ theme }) => css`
+    color: ${theme.COLORS.WHITE};
+    font-family: ${theme.FONTS.REGULAR};
+  `}
 `;
 
 export const Poster = styled.Image`

@@ -1,8 +1,14 @@
+import "react-native-gesture-handler"
 import { StatusBar } from "react-native";
 import { useEffect, useState } from "react";
 import NetInfo from "@react-native-community/netinfo";
 import { ThemeProvider } from "styled-components/native";
-import { useFonts, Nunito_700Bold, Nunito_400Regular } from "@expo-google-fonts/nunito";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+  useFonts,
+  Nunito_700Bold,
+  Nunito_400Regular,
+} from "@expo-google-fonts/nunito";
 
 import { theme } from "@theme/index";
 
@@ -34,26 +40,28 @@ export default function App() {
   }
 
   return (
-    <MoviesContextProvider>
-      <AuthContextProvider>
-        <ThemeProvider theme={theme}>
-          <StatusBar
-            translucent
-            barStyle="light-content"
-            backgroundColor="transparent"
-          />
-
-          {isConnected ? (
-            <Routes />
-          ) : (
-            <ErrorCard
-              icon="wifi-off"
-              title="Sem conexão com a internet"
-              subtitle="Você precisa de acesso à internet para continuar usando o BRQ Movies"
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <MoviesContextProvider>
+        <AuthContextProvider>
+          <ThemeProvider theme={theme}>
+            <StatusBar
+              translucent
+              barStyle="light-content"
+              backgroundColor="transparent"
             />
-          )}
-        </ThemeProvider>
-      </AuthContextProvider>
-    </MoviesContextProvider>
+
+            {isConnected ? (
+              <Routes />
+            ) : (
+              <ErrorCard
+                icon="wifi-off"
+                title="Sem conexão com a internet"
+                subtitle="Você precisa de acesso à internet para continuar usando o BRQ Movies"
+              />
+            )}
+          </ThemeProvider>
+        </AuthContextProvider>
+      </MoviesContextProvider>
+    </GestureHandlerRootView>
   );
 }
