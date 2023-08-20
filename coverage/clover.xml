@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1692567458718" clover="3.2.0">
-  <project timestamp="1692567458719" name="All files">
-    <metrics statements="220" coveredstatements="73" conditionals="50" coveredconditionals="14" methods="86" coveredmethods="34" elements="356" coveredelements="121" complexity="0" loc="220" ncloc="220" packages="21" files="41" classes="41"/>
+<coverage generated="1692567925241" clover="3.2.0">
+  <project timestamp="1692567925241" name="All files">
+    <metrics statements="220" coveredstatements="76" conditionals="50" coveredconditionals="14" methods="86" coveredmethods="35" elements="356" coveredelements="125" complexity="0" loc="220" ncloc="220" packages="21" files="41" classes="41"/>
     <package name="components.AppBar">
       <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
       <file name="index.tsx" path="/home/felipe/Documents/personal-projects/brqmovies/src/components/AppBar/index.tsx">
@@ -141,10 +141,10 @@
       </file>
     </package>
     <package name="context">
-      <metrics statements="25" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <metrics statements="25" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <file name="AuthContext.tsx" path="/home/felipe/Documents/personal-projects/brqmovies/src/context/AuthContext.tsx">
-        <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="14" count="0" type="stmt"/>
+        <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="14" count="1" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
@@ -175,11 +175,11 @@
       </file>
     </package>
     <package name="hooks">
-      <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="4" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
       <file name="useAuth.tsx" path="/home/felipe/Documents/personal-projects/brqmovies/src/hooks/useAuth.tsx">
-        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
       </file>
       <file name="useMovies.tsx" path="/home/felipe/Documents/personal-projects/brqmovies/src/hooks/useMovies.tsx">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
