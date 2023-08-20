@@ -6,7 +6,7 @@ import {
   Nunito_400Regular,
 } from "@expo-google-fonts/nunito";
 
-import theme from "./src/theme";
+import { theme } from "@theme/index";
 
 import { Routes } from "@routes/index";
 

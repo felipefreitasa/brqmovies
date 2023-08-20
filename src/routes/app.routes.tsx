@@ -1,22 +1,18 @@
-import {
-  NativeStackNavigationProp,
-  createNativeStackNavigator,
-} from "@react-navigation/native-stack";
+import { NativeStackNavigationProp, createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { Home } from "@screens/Home";
 import { MovieDetails } from "@screens/MovieDetails";
+
+import { MoviesTabs } from "@routes/movietabs.routes";
 
 type AppRoutesTypeProps = {
   home: undefined;
   movieDetails: undefined;
 };
 
-export type AppNavigatorRoutesProps =
-  NativeStackNavigationProp<AppRoutesTypeProps>;
+export type AppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutesTypeProps>;
 
 export function AppRoutes() {
-  const { Navigator, Screen } =
-    createNativeStackNavigator<AppRoutesTypeProps>();
+  const { Navigator, Screen } = createNativeStackNavigator<AppRoutesTypeProps>();
 
   return (
     <Navigator
@@ -27,14 +23,14 @@ export function AppRoutes() {
     >
       <Screen
         name="home"
-        component={Home}
+        component={MoviesTabs}
         options={{ gestureEnabled: false }}
       />
 
-      <Screen
+      <Screen 
         name="movieDetails" 
         component={MovieDetails}
-      />
+       />
     </Navigator>
   );
 }

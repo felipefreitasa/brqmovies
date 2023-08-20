@@ -9,6 +9,7 @@ module.exports = function(api) {
           root: [ './src'],
           alias: {
             '@hooks': './src/hooks',
+            '@theme': './src/theme',
             '@utils': './src/utils',
             '@assets': './src/assets',
             '@routes': './src/routes',

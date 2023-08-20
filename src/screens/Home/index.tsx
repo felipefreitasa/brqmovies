@@ -6,7 +6,6 @@ import { useMovies } from "@hooks/useMovies";
 
 import { AppNavigatorRoutesProps } from "@routes/app.routes";
 
-import { AppBar } from "@components/AppBar";
 import { Loading } from "@components/Loading";
 import { MovieCard } from "@components/MovieCard";
 import { ErrorCard } from "@components/ErrorCard";
@@ -14,7 +13,6 @@ import { ErrorCard } from "@components/ErrorCard";
 import { Container } from "./styles";
 
 export function Home() {
-  
   const { navigate } = useNavigation<AppNavigatorRoutesProps>();
 
   const {
@@ -39,53 +37,41 @@ export function Home() {
   }, []);
 
   if (isLoading) {
-    return (
-      <>
-        <AppBar />
-        <Loading />
-      </>
-    );
+    return <Loading />;
   }
 
   if (hasError) {
     return (
-      <>
-        <AppBar />
-        <ErrorCard
-          icon="error"
-          title="Erro ao carregar lista de filmes"
-          subtitle="Estamos resolvendo o problema. Por favor, tente novamente."
-          buttonTitle="Tentar novamente"
-          onTryAgain={() => {
-            setHasError(false);
-            fetchPopularMovies();
-          }}
-        />
-      </>
+      <ErrorCard
+        icon="error"
+        title="Erro ao carregar lista de filmes"
+        subtitle="Estamos resolvendo o problema. Por favor, tente novamente."
+        buttonTitle="Tentar novamente"
+        onTryAgain={() => {
+          setHasError(false);
+          fetchPopularMovies();
+        }}
+      />
     );
   }
 
   return (
-    <>
-      <AppBar />
-
-      <Container>
-        <FlatList
-          numColumns={2}
-          data={popularMovies}
-          keyExtractor={(item) => item.id.toString()}
-          style={{ width: "100%", paddingHorizontal: 8 }}
-          renderItem={({ item }) => (
-            <MovieCard
-              item={item}
-              onPress={() => {
-                setSelectedMovie(item);
-                navigate("movieDetails");
-              }}
-            />
-          )}
-        />
-      </Container>
-    </>
+    <Container>
+      <FlatList
+        numColumns={2}
+        data={popularMovies}
+        keyExtractor={(item) => item.id.toString()}
+        style={{ width: "100%", paddingHorizontal: 8 }}
+        renderItem={({ item }) => (
+          <MovieCard
+            item={item}
+            onPress={() => {
+              setSelectedMovie(item);
+              navigate("movieDetails");
+            }}
+          />
+        )}
+      />
+    </Container>
   );
 }
