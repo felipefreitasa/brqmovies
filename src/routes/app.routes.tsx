@@ -4,9 +4,11 @@ import {
 } from "@react-navigation/native-stack";
 
 import { Home } from "@screens/Home";
+import { MovieDetails } from "@screens/MovieDetails";
 
 type AppRoutesTypeProps = {
   home: undefined;
+  movieDetails: undefined;
 };
 
 export type AppNavigatorRoutesProps =
@@ -27,6 +29,11 @@ export function AppRoutes() {
         name="home"
         component={Home}
         options={{ gestureEnabled: false }}
+      />
+
+      <Screen
+        name="movieDetails" 
+        component={MovieDetails}
       />
     </Navigator>
   );

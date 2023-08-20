@@ -5,7 +5,9 @@
     "baseUrl": "./",
     "paths": {
       "@hooks/*": ["./src/hooks/*"],
+      "@utils/*": ["./src/utils/*"],
       "@assets/*": ["./src/assets/*"],
+      "@routes/*": ["./src/routes/*"],
       "@screens/*": ["./src/screens/*"],
       "@context/*": ["./src/context/*"],
       "@services/*": ["./src/services/*"],

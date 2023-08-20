@@ -2,32 +2,35 @@ import { StatusBar } from "react-native";
 import { ThemeProvider } from "styled-components/native";
 import {
   useFonts,
-  Roboto_700Bold,
-  Roboto_400Regular,
-} from "@expo-google-fonts/roboto";
+  Nunito_700Bold,
+  Nunito_400Regular,
+} from "@expo-google-fonts/nunito";
 
 import theme from "./src/theme";
 
-import { Routes } from "./src/routes";
+import { Routes } from "@routes/index";
 
 import { AuthContextProvider } from "@context/AuthContext";
+import { MoviesContextProvider } from "@context/MoviesContext";
 
 import { Loading } from "@components/Loading";
 
 export default function App() {
-  const [fontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
+  const [fontsLoaded] = useFonts({ Nunito_400Regular, Nunito_700Bold });
 
   return (
-    <AuthContextProvider>
-      <ThemeProvider theme={theme}>
-        <StatusBar
-          translucent
-          barStyle="light-content"
-          backgroundColor="transparent"
-        />
+    <MoviesContextProvider>
+      <AuthContextProvider>
+        <ThemeProvider theme={theme}>
+          <StatusBar
+            translucent
+            barStyle="light-content"
+            backgroundColor="transparent"
+          />
 
-        {fontsLoaded ? <Routes /> : <Loading />}
-      </ThemeProvider>
-    </AuthContextProvider>
+          {fontsLoaded ? <Routes /> : <Loading />}
+        </ThemeProvider>
+      </AuthContextProvider>
+    </MoviesContextProvider>
   );
 }
