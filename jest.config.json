@@ -1,8 +1,17 @@
 {
   "preset": "jest-expo",
   "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"],
+  "transformPathIgnorePatterns": [
+    "./__tests__/mocks"
+  ],
   "transformIgnorePatterns": [
     "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
   ],
-  "setupFiles": ["./__tests__/mocks/async-storage.js"]
+  "setupFiles": ["./__tests__/mocks/async-storage.js"],
+  "collectCoverageFrom": [
+    "./src/**/*.{ts,tsx}"
+  ],
+  "coveragePathIgnorePatterns": [
+    "./src/@types"
+  ]
 } 
