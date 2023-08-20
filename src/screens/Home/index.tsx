@@ -1,6 +1,6 @@
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { BackHandler, FlatList } from "react-native";
-import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 import { useMovies } from "@hooks/useMovies";
 

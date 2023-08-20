@@ -3,16 +3,35 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import { Home } from "@screens/Home";
 import { FavoriteMovies } from "@screens/FavoriteMovies";
 
-import { AppBar } from "@components/AppBar";
+import { useAuth } from "@hooks/useAuth";
 
 import { theme } from "@theme/index";
+
+import { AppBar } from "@components/AppBar";
 
 export function MoviesTabs() {
   const { Screen, Navigator } = createMaterialTopTabNavigator();
 
+  const { setIsLogoutDropdownVisible, isLogoutDropdownVisible, setIsLogged } =
+    useAuth();
+
+  function handleLogoutDropdownVisibility() {
+    setIsLogoutDropdownVisible(isLogoutDropdownVisible ? false : true);
+  }
+
+  function handleLogout() {
+    setIsLogoutDropdownVisible(false);
+    setIsLogged(false);
+  }
+
   return (
     <>
-      <AppBar />
+      <AppBar
+        title="BRQ Movies"
+        onLogout={handleLogout}
+        isLogoutDropdownOpen={isLogoutDropdownVisible}
+        onClickMoreButton={handleLogoutDropdownVisibility}
+      />
 
       <Navigator
         screenOptions={{
@@ -23,15 +42,9 @@ export function MoviesTabs() {
           tabBarIndicatorStyle: { backgroundColor: theme.COLORS.PRIMARY },
         }}
       >
-        <Screen 
-          name="Todos os filmes" 
-          component={Home}
-        />
+        <Screen name="Todos os filmes" component={Home} />
 
-        <Screen 
-          name="Filmes Favoritos" 
-          component={FavoriteMovies}
-        />
+        <Screen name="Filmes Favoritos" component={FavoriteMovies} />
       </Navigator>
     </>
   );

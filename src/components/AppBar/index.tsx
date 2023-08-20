@@ -1,59 +1,41 @@
 import { useTheme } from "styled-components/native";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
-import { useAuth } from "@hooks/useAuth";
+import { IconButton } from "@components/IconButton";
+import { LogoutButton } from "@components/LogoutButton";
 
-import {
-  Title,
-  Container,
-  LogoutButton,
-  LogoutButtonTitle,
-  LogoutDropdownIconButton,
-} from "./styles";
+import { Title, Container } from "./styles";
 
-export function AppBar() {
+type Props = {
+  title: string;
+  onLogout: () => void;
+  onClickMoreButton: () => void;
+  isLogoutDropdownOpen: boolean;
+};
 
+export function AppBar({
+  title,
+  onLogout,
+  onClickMoreButton,
+  isLogoutDropdownOpen,
+}: Props) {
+  
   const { COLORS } = useTheme();
-
-  const { setIsLogoutDropdownVisible, isLogoutDropdownVisible, setIsLogged } = useAuth();
-
-  function handleLogout(){
-    setIsLogoutDropdownVisible(false)
-    setIsLogged(false)
-  }
 
   return (
     <>
-      <Container>
-        <Title>BRQ Movies</Title>
+      <Container testID="app-bar">
+        <Title>{title}</Title>
 
-        <LogoutDropdownIconButton
-          isActive={isLogoutDropdownVisible}
-          onPress={() => {
-            setIsLogoutDropdownVisible(isLogoutDropdownVisible ? false : true);
-          }}
-        >
-          <MaterialCommunityIcons
-            size={24}
-            name="dots-vertical"
-            color={isLogoutDropdownVisible ? COLORS.BACKGROUND : COLORS.WHITE}
-          />
-        </LogoutDropdownIconButton>
+        <IconButton
+          icon="more-vert"
+          iconColor={COLORS.WHITE}
+          onPress={onClickMoreButton}
+          testID="dropdown-icon-button"
+          isActive={isLogoutDropdownOpen}
+        />
       </Container>
 
-      {isLogoutDropdownVisible && (
-        <LogoutButton onPress={handleLogout}>
-          <MaterialIcons
-            size={24}
-            name="logout"
-            color={COLORS.WHITE}
-          />
-
-          <LogoutButtonTitle numberOfLines={1}>
-            Sair
-          </LogoutButtonTitle>
-        </LogoutButton>
-      )}
+      {isLogoutDropdownOpen && <LogoutButton onPress={onLogout} />}
     </>
   );
 }

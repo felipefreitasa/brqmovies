@@ -7,4 +7,3 @@ export function formatDateToBrazilianFormat(inputDate: string): string {
 
   return `${day}/${month}/${year}`;
 }
-

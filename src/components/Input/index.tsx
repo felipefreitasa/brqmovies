@@ -32,11 +32,11 @@ export function Input({
         inputContainerStyle={{ backgroundColor: COLORS.BACKGROUND_SECONDARY }}
         leading={
           leadingIcon && (
-            <Feather name={leadingIcon} size={24} color={COLORS.WHITE} />
+            <Feather testID="input-leading-icon" name={leadingIcon} size={24} color={COLORS.WHITE} />
           )
         }
         trailing={
-          <TouchableOpacity onPress={onCleanInput} activeOpacity={0.8}>
+          <TouchableOpacity testID="input-trailing-icon" onPress={onCleanInput} activeOpacity={0.8}>
             <Feather name="x-circle" size={24} color={COLORS.WHITE} />
           </TouchableOpacity>
         }

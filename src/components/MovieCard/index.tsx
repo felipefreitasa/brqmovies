@@ -12,7 +12,7 @@ export type Props = TouchableOpacityProps & {
 
 export function MovieCard({ item, ...rest }: Props) {
   return (
-    <Container activeOpacity={0.8} {...rest}>
+    <Container testID="movie-card-poster" activeOpacity={0.8} {...rest}>
       <Poster source={{ uri: `${MOVIE_DB_API_IMAGE}${item.poster_path}` }} />
     </Container>
   );

@@ -1,4 +1,4 @@
-import "react-native-gesture-handler"
+import "react-native-gesture-handler";
 import { StatusBar } from "react-native";
 import { useEffect, useState } from "react";
 import NetInfo from "@react-native-community/netinfo";
@@ -40,10 +40,10 @@ export default function App() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <MoviesContextProvider>
-        <AuthContextProvider>
-          <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <MoviesContextProvider>
+          <AuthContextProvider>
             <StatusBar
               translucent
               barStyle="light-content"
@@ -59,9 +59,9 @@ export default function App() {
                 subtitle="Você precisa de acesso à internet para continuar usando o BRQ Movies"
               />
             )}
-          </ThemeProvider>
-        </AuthContextProvider>
-      </MoviesContextProvider>
-    </GestureHandlerRootView>
+          </AuthContextProvider>
+        </MoviesContextProvider>
+      </GestureHandlerRootView>
+    </ThemeProvider>
   );
 }
