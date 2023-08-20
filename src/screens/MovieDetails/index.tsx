@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { ScrollView } from "react-native";
+import { useTheme } from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
+import Animated, {
+  interpolate,
+  useSharedValue,
+  useAnimatedStyle,
+  interpolateColor,
+  useAnimatedScrollHandler,
+} from "react-native-reanimated";
 
 import { MOVIE_DB_API_IMAGE } from "@env";
 
@@ -10,48 +18,105 @@ import { formatDateToBrazilianFormat } from "@utils/formatDateToBrazilianFormat"
 import { saveFavoriteMovie } from "@storage/favoriteMovies/saveFavoriteMovie";
 import { removeFavoriteMovie } from "@storage/favoriteMovies/removeFavoriteMovie";
 
+import { IconButton } from "@components/IconButton";
 import { MovieDetailsCard } from "@components/MovieDetailsCard";
-import { MoviesDetailsAppBar } from "@components/MovieDetailsAppBar";
 
 import {
   Poster,
+  Header,
   Content,
   Overview,
   Container,
+  HeaderTitle,
   SynopsisLabel,
   OriginalTitle,
   CardsContainer,
 } from "./styles";
 
+const AnimatedHeader = Animated.createAnimatedComponent(Header);
+const AnimatedHeaderTitle = Animated.createAnimatedComponent(HeaderTitle);
+
 export function MovieDetails() {
-  
+  const { COLORS } = useTheme();
+
+  const { goBack } = useNavigation();
+
   const { selectedMovie, favoriteMovies } = useMovies();
 
-  const isFavoriteMovie = favoriteMovies.some((movie) => movie.id === selectedMovie.id)
+  const isFavoriteMovie = favoriteMovies.some(
+    (movie) => movie.id === selectedMovie.id
+  );
 
-  const [isFavorite, setIsFavorite] = useState(isFavoriteMovie) 
+  const [isFavorite, setIsFavorite] = useState(isFavoriteMovie);
 
-  async function handleFavoriteMovie(){
-    if (isFavorite){
-      setIsFavorite(false)
-      await removeFavoriteMovie(selectedMovie)
+  async function handleFavoriteMovie() {
+    if (isFavorite) {
+      setIsFavorite(false);
+      await removeFavoriteMovie(selectedMovie);
     } else {
-      setIsFavorite(true)
-      await saveFavoriteMovie(selectedMovie)
+      setIsFavorite(true);
+      await saveFavoriteMovie(selectedMovie);
     }
   }
 
+  const scrollY = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      scrollY.value = event.contentOffset.y;
+    },
+  });
+
+  const animatedHeaderStyles = useAnimatedStyle(() => {
+    return {
+      backgroundColor: interpolateColor(
+        scrollY.value,
+        [50, 120],
+        ["transparent", COLORS.BACKGROUND_SECONDARY]
+      ),
+    };
+  });
+
+  const animatedHeaderTitleStyles = useAnimatedStyle(() => {
+    return {
+      opacity: interpolate(
+        scrollY.value, 
+        [50, 120], 
+        [0, 1]
+      ),
+    };
+  });
+
   return (
     <>
-      <MoviesDetailsAppBar 
-        title={selectedMovie.title}
-        isFavoriteMovie={isFavorite}
-        addMovieToFavoriteList={handleFavoriteMovie}
-      />
+      <AnimatedHeader style={animatedHeaderStyles}>
+        <IconButton onPress={goBack} icon="chevron-left" />
 
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
+        <AnimatedHeaderTitle
+          numberOfLines={1}
+          style={animatedHeaderTitleStyles}
+        >
+          {selectedMovie.title}
+        </AnimatedHeaderTitle>
+
+        <IconButton
+          onPress={handleFavoriteMovie}
+          icon={isFavorite ? "favorite" : "favorite-outline"}
+        />
+      </AnimatedHeader>
+
+      <Animated.ScrollView
+        bounces={false}
+        onScroll={scrollHandler}
+        scrollEventThrottle={16}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
         <Container>
-          <Poster source={{ uri: `${MOVIE_DB_API_IMAGE}${selectedMovie.poster_path}` }} />
+          <Poster
+            source={{
+              uri: `${MOVIE_DB_API_IMAGE}${selectedMovie.poster_path}`,
+            }}
+          />
 
           <Content>
             <OriginalTitle>{selectedMovie.title}</OriginalTitle>
@@ -89,7 +154,7 @@ export function MovieDetails() {
             </CardsContainer>
           </Content>
         </Container>
-      </ScrollView>
+      </Animated.ScrollView>
     </>
   );
 }
