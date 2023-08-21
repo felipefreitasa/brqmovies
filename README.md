@@ -1,9 +1,8 @@
 <h1 align="center">
-  <img alt="BRQ Movies" height="80" src="https://github.com/felipefreitasa/brqmovies/assets/77179768/f7901aa4-8843-4eac-bcad-d1637e44bfb5" />
+  <img alt="BRQ Movies" height="80" src="https://github.com/felipefreitasa/brqmovies/assets/77179768/1b4e00c3-d6ae-49e8-b43f-51cbbfefb135" />
 </h1>
 
-
-![cover](https://github.com/felipefreitasa/brqmovies/assets/77179768/1bfa684d-6840-48f3-9745-c98a70d78370)
+![cover](https://github.com/felipefreitasa/brqmovies/assets/77179768/0e2a713b-7c00-4410-a994-75a4d8fe7e7e)
 
 ## 💻 BRQ Movies
 
